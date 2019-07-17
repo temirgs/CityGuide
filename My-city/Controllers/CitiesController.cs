@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mycity.Data;
@@ -13,6 +15,7 @@ namespace Mycity.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CitiesController : ControllerBase
     {
         private IAppRepository _appRepository;
@@ -38,13 +41,17 @@ namespace Mycity.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
         public IActionResult Add([FromBody]City city)
         {
             _appRepository.Add(city);
             _appRepository.SaveAll();
             return Ok(city);
         }
+        /// <summary>
+        /// Get  Photo By Id
+        /// </summary>
+        /// <param name="cityId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("photos")]
         public IActionResult GetPhotosById(int cityId)

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +17,7 @@ using Mycity.Models;
 namespace Mycity.Controllers
 {
     
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class DefaultController : ControllerBase
     {
@@ -29,7 +30,7 @@ namespace Mycity.Controllers
             _authRepository = authRepository;
             _configuration = configuration;
         }
-        [HttpPost("register")]
+        [HttpPost]
         public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
         {
             if (await _authRepository.UserExists(userForRegisterDto.UserName))
@@ -48,7 +49,8 @@ namespace Mycity.Controllers
             return StatusCode(201);
         }
 
-        [HttpPost("login")]
+        [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]UserForLoginDto userForLoginDto)
         {
             var user = await _authRepository.Login(userForLoginDto.UserName, userForLoginDto.Password);

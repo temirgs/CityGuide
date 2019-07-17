@@ -31,12 +31,11 @@ export default new Vuex.Store({
       })
     },
     addCity(context, staff) {
-      return axios.post('', staff.cities)
+      return axios.post("https://localhost:44358/api/Cities/Add", staff.city)
         .then(response => {
-          context.commit("addCity", { ...staff.cities })
+          context.commit("addCity", { ...staff.city })
         })
     },
-
   },
   getters: {
     getCites(state) {

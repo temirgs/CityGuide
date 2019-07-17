@@ -7,19 +7,17 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <router-link to="/" class="nav-link" >Home</router-link>
-        
+        <router-link to="/" class="nav-link" >Home</router-link> 
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+      <li class="nav-item active">
+        <router-link class="nav-link" to="/NewCity">New City</router-link>
       </li>
     </ul>
-    <router-link type="button" style=" margin-right:50px;" class=" btn btn-warning" to="/Login">Login</router-link>
-     
+    <router-link type="button" style=" margin-right:50px;" class="btn btn-link" to="/Login">Login</router-link> 
+     <router-link type="button" style=" margin-right:50px;" class="btn btn-link" to="/Register">Register</router-link> 
   </div>
 </nav>
      <router-view></router-view>

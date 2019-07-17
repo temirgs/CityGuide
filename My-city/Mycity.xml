@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mycity</name>
+    </assembly>
+    <members>
+        <member name="M:Mycity.Controllers.CitiesController.GetPhotosById(System.Int32)">
+            <summary>
+            Get  Photo By Id
+            </summary>
+            <param name="cityId"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

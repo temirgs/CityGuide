@@ -2,35 +2,44 @@
   <div class="container">
     <br />
     <br />
-    <form>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-        />
-        <small
-          id="emailHelp"
-          class="form-text text-muted"
-        >We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="exampleInputPassword1"
-          placeholder="Password"
-        />
-      </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+    <form @submit.prevent="onSubmit">
+      <md-field>
+        <label>User Name</label>
+        <md-input v-model="login.username" md-counter="30"></md-input>
+      </md-field>
+
+      <md-field>
+        <label>Password</label>
+        <md-input type="password" v-model="login.password" maxlength="30"></md-input>
+      </md-field>
+      <button type="submit" class="btn btn-secondary btn-lg btn-block">Login</button>
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  name: "Counters",
+ 
+  data() {
+    return {
+      login: {
+        username: "",
+        password: ""
+      }
+    };
+  },
+  methods: {
+    onSubmit() {
+      this.axios.post("https://localhost:44358/api/Default/Login",this.login)
+      .then(response=>{
+        this.saveToken(response.data),
+        this.$router.push('/')
+      })
+    },
+    saveToken(token){
+      localStorage.setItem('token',token)
+    }
+  }
+};
+</script>

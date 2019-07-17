@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Mycity.Data;
 using Mycity.Helpers;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace My_city
 {
@@ -55,6 +56,15 @@ namespace My_city
                    ValidateAudience=false
                 };
             });
+
+            services.AddSwaggerGen(c => {
+
+                c.SwaggerDoc("v1", new Info { Title = "Core Api", Description = "Swagger Core Api" });
+                var xmlPath = System.AppDomain.CurrentDomain + @"Mycity.xml";
+             //c.IncludeXmlComments(xmlPath);
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +79,11 @@ namespace My_city
                 app.UseHsts();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c=> {
 
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core Api");
+            });
             app.UseCors(builder => builder.WithOrigins("http://localhost:8080", "http://localhost:8081", "http://0.0.0.0", "http://localhost").AllowAnyHeader().AllowAnyMethod());
             app.UseStaticFiles();
             app.UseHttpsRedirection();
