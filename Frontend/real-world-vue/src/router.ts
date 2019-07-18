@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Login from "./components/Login.vue";
 import Card from "./views/Card.vue";
 import CityDetail from "./views/CityDetail.vue";
 import NewCity from  "./views/NewCity.vue";
@@ -15,11 +14,6 @@ export default new Router({
       path: "/",
       name: "Card",
       component: Card
-    },
-    {
-      path: "/Login",
-      name: "Login",
-      component: Login
     },
     {
       path: "/CityDetail/:id",

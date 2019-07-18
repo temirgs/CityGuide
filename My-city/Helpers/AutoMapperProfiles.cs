@@ -17,8 +17,8 @@ namespace Mycity.Helpers
                   opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
               });
             CreateMap<City, CityForDetailDto>();
-         //   CreateMap<Photo,PhotoForCreationDto>();
-            CreateMap< Photo, PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<Photo, PhotoForReturnDto>();
         }
     }
 }

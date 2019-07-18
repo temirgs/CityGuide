@@ -15,7 +15,7 @@ namespace Mycity.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize]
     public class CitiesController : ControllerBase
     {
         private IAppRepository _appRepository;
@@ -47,11 +47,6 @@ namespace Mycity.Controllers
             _appRepository.SaveAll();
             return Ok(city);
         }
-        /// <summary>
-        /// Get  Photo By Id
-        /// </summary>
-        /// <param name="cityId"></param>
-        /// <returns></returns>
         [HttpGet]
         [Route("photos")]
         public IActionResult GetPhotosById(int cityId)

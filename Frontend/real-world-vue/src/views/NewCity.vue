@@ -4,11 +4,11 @@
     <form @submit.prevent="onSubmit">
       <md-field>
         <label>City Name</label>
-        <md-textarea v-model="city.name" md-autogrow md-counter="80"></md-textarea>
+        <md-textarea required="" v-model="city.name" md-autogrow md-counter="80"></md-textarea>
       </md-field>
       <md-field>
         <label>Description</label>
-        <md-textarea v-model="city.description" md-counter="200"></md-textarea>
+        <md-textarea required="" v-model="city.description" md-counter="200"></md-textarea>
       </md-field>
       <button type="submit" class="btn btn-primary btn-lg btn-block">Add New City</button>
     </form>

@@ -1,48 +1,27 @@
-import axios from 'axios';
 <template>
-  <main role="main" class="container">
+  <div class="container">
     <br />
-    <br />
-    <div
-      id="carousel-example-2"
-      class="carousel slide carousel-fade z-depth-1-half"
-      data-ride="carousel"
-    >
-      <!--Indicators-->
-      <ol class="carousel-indicators">
-        <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-2" data-slide-to="1"></li>
-        <li data-target="#carousel-example-2" data-slide-to="2"></li>
-      </ol>
-      <!--/.Indicators-->
-      <!--Slides-->
-      <div class="carousel-inner" role="listbox">
-        <div v-for="(item,index) in photos" :key="index">
-          <div class="carousel-item active">
-            <div class="view">
-              <img class="d-block w-100" :src="item.url" alt="First slide" />
-              <div class="mask rgba-black-light"></div>
-            </div>
-            <div class="carousel-caption">
-              <h3 class="h3-responsive">{{item.description}}</h3>
-              <p>{{item.dateAdded}}</p>
-            </div>
-          </div>
+    <div class="card-group">
+      <div v-for="(item,index) in photos" :key="index" class="card">
+        <img :src="item.url" style="height:200px;width:400px" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">{{item.description}}</p>
+          <p class="card-text">
+            <small class="text-muted">{{item.dateAdded}}</small>
+          </p>
         </div>
-        <!--/.Slides-->
-        <!--Controls-->
-        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-        <!--/.Controls-->
       </div>
     </div>
-  </main>
+    <br />
+    <br />
+    <h3>Photo Upload</h3>
+      <md-field>
+        <label>Only images</label>
+        <md-file  accept="image/*" />
+      </md-field>
+      <button   type="button" class="btn btn-primary btn-lg btn-block">Add New Photo</button>
+  </div>
 </template>
 <script>
 export default {

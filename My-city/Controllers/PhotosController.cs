@@ -19,7 +19,7 @@ namespace Mycity.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PhotosController : ControllerBase
     {
         private IAppRepository _appRepository;
@@ -40,14 +40,14 @@ namespace Mycity.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPhotoForCity(int cityId,[FromBody] PhotoForCreationDto photoForCreationDto)
+        public IActionResult AddPhotoForCity(int cityId,[FromForm] PhotoForCreationDto photoForCreationDto)
         {
             var city = _appRepository.GetCityById(cityId);
             if (city==null)
             {
                 return BadRequest("Could not find the city");
             }
-            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var currentUserId =city.UserId /*int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)*/;
             if (currentUserId!=city.UserId)
             {
                 return Unauthorized();
@@ -65,8 +65,9 @@ namespace Mycity.Controllers
                     uploadResult = _cloudinary.Upload(uploadParams);
                 }
             }
+            var result = uploadResult.PublicId;
             photoForCreationDto.Url = uploadResult.Uri.ToString();
-            photoForCreationDto.PublicId = uploadResult.PublicId;
+          //  photoForCreationDto.PublicId = uploadResult.PublicId;
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
             photo.City = city;
